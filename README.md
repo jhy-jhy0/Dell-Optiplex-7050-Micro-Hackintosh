@@ -1,4 +1,5 @@
-# Dell Optiplex 7050 Micro/SFF/MT Hackintosh - OpenCore 1.0.4
+1.0.8-Add Support for macOS Tahoe
+# Dell Optiplex 7050 Micro/SFF/MT Hackintosh - OpenCore 1.0.8
 
 <div align="center">
 
@@ -49,8 +50,9 @@ This build has been tested with these macOS versions:
 
 | macOS Version | Status | Notes |
 |---------------|:------:|-------|
-| ✅ **Sequoia** | Supported | Cannot use Intel WiFi (disable AirportItlwm kexts). Only Ethernet is available. |
-| ✅ **Sonoma** | Recommended | Best with Intel WiFi card and kexts |
+| Add ✅ **Tahoe** | Supported | Use AirportItlwm kexts or Use OCLP patch Boardroom Wifi |
+| ✅ **Sequoia** | Supported | Use AirportItlwm kexts or Use OCLP patch Boardroom Wifi (New)|
+| ✅ **Sonoma** | Recommended | Use AirportItlwm kexts or Use OCLP patch Boardroom Wifi (New)|
 | ✅ **Ventura** | Recommended | Best with native Broadcom WiFi card and kexts |
 | ✅ **Monterey** | Supported | Works with Broadcom cards |
 | ✅ **Big Sur** | Supported | Works with Broadcom cards |
@@ -136,9 +138,7 @@ https://github.com/linkev/Dell-Optiplex-7050-Micro-Hackintosh/assets/13016565/63
 > [!NOTE]
 > Use a Dummy DisplayPort or a HDMI plug to "activate" the GPU and then you can use something like Parsec or TeamViewer to remote control it.
 
-- ❌ AirDrop (it worked with native Broadcom WiFi card, until Sonoma broke it)
-- ❌ Unlock with Apple Watch (lost in Sonoma)
-- ❌ AirPlay to Mac (worked in Monterey, but not Sonoma)
+
 
 ## 🚀 Getting Started
 
@@ -165,10 +165,11 @@ You can attach the config.plist in GenSMBIOS so it automatically fills the corre
 
 The following boot arguments are used:
 
-- `-alcid=11` - Required for audio (Headphone Jack/Line Out & Internal Speaker)
+- `-alcid=66` - Required for audio (Headphone Jack/Line Out & Internal Speaker)
 - `igfxonln=1` - Forces display/GPU activation (helpful when booting without a display)
 - `revpatch=sbvmm` - Enables seamless macOS updates with [RestrictEvents](https://github.com/acidanthera/RestrictEvents)
 - `igfxrpsc=1` - Added in repo version 1.0.4 to "Enable RPS control patch". Apparently it improves GPU performance as per [WhateverGreen's README](https://github.com/acidanthera/WhateverGreen)
+- `-no_compat_check` - Run macOS Tahoe on unsupported SMBios
 
 > [!TIP]
 > Add `-v` to boot args for verbose mode if you need to troubleshoot boot issues. I've omitted this, because I've reinstalled macOS successfully so many times that I don't need it anymore.
@@ -382,6 +383,7 @@ For headless mode (no monitor):
 - [acidanthera](https://github.com/acidanthera) for OpenCore and many essential kexts
 - [exelban's Stats](https://github.com/exelban/stats) for system monitoring
 - [OpenIntelWireless](https://github.com/OpenIntelWireless) for Intel WiFi/BT support
+- Add [AppleHDA](https://github.com/laobamac/SimpleHDA) for Restore native AppleHDA on macOS Tahoe
 
 And finally all of you! Thank you for all of the stars and forks and using my EFI! I hope this repo helped you!
 
